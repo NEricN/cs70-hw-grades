@@ -76,15 +76,14 @@ def calculate():
 			else:
 				hw.add_extra(int(m.group(2)))
 
-	for h in homeworks:
-		print(h)
+		print(hw)
 
 	hw15 = homeworks.pop()
 
 	#method one
 	hw_method_one = sorted(homeworks, key=lambda hw: hw.get_percent())
 	hw_method_one.reverse()
-	hw_method_one.pop()
+	temp_1 = hw_method_one.pop()
 	final_percent = sum([h.get_extra_percent()*(1/13) for h in hw_method_one])
 	final_percent += hw15.get_percent()*(1/13)
 	print("method one: " + str(final_percent))
@@ -93,14 +92,11 @@ def calculate():
 	hw_method_two = sorted(homeworks, key=lambda hw: hw.get_raw())
 	hw_method_two.reverse()
 	temp = hw_method_two.pop()
-	final_percent = sum([h.get_total_raw() for h in hw_method_two])/(raw_max - temp.get_max_raw())
+	final_percent = (sum([h.get_total_raw() for h in hw_method_two]) + hw15.get_raw())/(raw_max - temp.get_max_raw())
 	print("method two: " + str(final_percent))
 
 	#method three
-	hw_method_three = sorted(homeworks, key=lambda hw: hw.get_percent())
-	hw_method_three.reverse()
-	temp = hw_method_three.pop()
-	final_percent = sum([h.get_total_raw() for h in hw_method_three])/(raw_max - temp.get_max_raw())
+	final_percent = (sum([h.get_total_raw() for h in hw_method_one]) + hw15.get_raw())/(raw_max - temp_1.get_max_raw())
 	print("method three: " + str(final_percent))
 
 calculate()
