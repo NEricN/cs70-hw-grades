@@ -62,6 +62,7 @@ def calculate():
 			fi = open(name+"_grades.txt", "r")
 		except:
 			hw.set_zero(max_scores[i - 1])
+			print(hw)
 			continue
 
 		for line in fi:
