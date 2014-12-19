@@ -86,18 +86,18 @@ def calculate():
 	hw_method_one.reverse()
 	temp_1 = hw_method_one.pop()
 	final_percent = sum([h.get_extra_percent()*(1/13) for h in hw_method_one])
-	final_percent += hw15.get_percent()*(1/13)
+	final_percent += hw15.get_percent()*(1/13) + temp_1.get_extra()*(1/13)/temp_1.get_max_raw()
 	print("method one: " + str(final_percent))
 
 	#method two
 	hw_method_two = sorted(homeworks, key=lambda hw: hw.get_raw())
 	hw_method_two.reverse()
 	temp = hw_method_two.pop()
-	final_percent = (sum([h.get_total_raw() for h in hw_method_two]) + hw15.get_raw())/(raw_max - temp.get_max_raw())
+	final_percent = (sum([h.get_total_raw() for h in hw_method_two]) + hw15.get_raw() + temp.get_extra())/(raw_max - temp.get_max_raw())
 	print("method two: " + str(final_percent))
 
 	#method three
-	final_percent = (sum([h.get_total_raw() for h in hw_method_one]) + hw15.get_raw())/(raw_max - temp_1.get_max_raw())
+	final_percent = (sum([h.get_total_raw() for h in hw_method_one]) + hw15.get_raw() + temp_1.get_extra())/(raw_max - temp_1.get_max_raw())
 	print("method three: " + str(final_percent))
 
 calculate()
